@@ -27,6 +27,11 @@ const userSchema = new Schema({
         unique: true,
         minlength: 4
     }
+
+    updated: {
+      type: Date,
+      default: Date.now
+    }
 });
 
 module.exports = userSchema;
