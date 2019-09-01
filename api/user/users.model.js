@@ -26,7 +26,12 @@ const userSchema = new Schema({
         type: String,
         unique: true,
         minlength: 4
-    }
+    },
+
+    admin: {
+        type:Boolean,
+        default: false
+    },
 
     updated: {
       type: Date,

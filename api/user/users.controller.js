@@ -1,5 +1,6 @@
 const Users = require('./users.dao');
 const bcrypt = require('bcrypt');
+const token = require('./token');
 
 exports.createUser = async (req, res, next) => {
     const user = req.body;
@@ -55,18 +56,19 @@ exports.fetchUser = async (req,res,next) => {
           message: "User Not found"
       })
 
-      const res = bcrypt.compare(user.password,user_.password);
+      const response = bcrypt.compare(user.password,user_.password);
 
-      if (!res) res.json({
+      if (!response) res.json({
           error: err,
           code: 401,
           message: "Username or password do not match"
       })
 
+    
       res.json({
           message: "User fetched successfully",
           code: 200,
-          data: user_
+          data: token.sign(user_)
       })
     })
 }
